@@ -1,0 +1,151 @@
+---
+title: "Introduction to rhierbaps"
+author: "Gerry Tonkin-Hill"
+date: "`r Sys.Date()`"
+bibliography: bibliography.bib
+output: 
+  html_document:
+    fig_width: 12
+    fig_height: 8
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=TRUE, warning=FALSE, message=FALSE,
+                      tidy=TRUE)
+```
+
+The hierBAPS algorithm was introduced in [@Cheng2013-mp] and provides a method for hierarchically clustering DNA sequence data to reveal nested population structure. Previously the algorithm was available as a compiled MATLAB binary. We provide a convenient R implementation and include a number of useful additional options including the ability to use multiple cores, save the log marginal likelihood scores and run the algorithm until local convergence. Furthermore, we provide a wrapper to a ggtree plotting function allowing for easy exploration of sub-clusters.
+
+***
+
+**Things to keep in mind before running hierBAPS**
+
+1. hierBAPS uses a uniform prior for K.
+2. The prior for a site depend on the available snps, i.e. if a site only has 'AC', then the prior for 'ACGT' is (1/2, 1/2, 0, 0)
+3. The initial sequence partiton is generated using hierarchical clustering with complete linkage based on a Hamming distance matrix.
+4. The initial number of populations should be set much higher than the expected number of populations.
+5. More search rounds of the algorithm can be added using the `n.extra.rounds` parameter.
+6. To get reproducible results the seed in R must be set.
+
+## Libraries
+
+```{r}
+library(rhierbaps)
+library(ggtree)
+library(phytools)
+
+set.seed(1234)
+```
+
+## Loading data
+
+We first need to load a multiple sequence alignment in fasta format. We can then generate the required SNP matrix.
+
+```{r}
+fasta.file.name <- system.file("extdata", "seqs.fa", package = "rhierbaps")
+snp.matrix <- load_fasta(fasta.file.name)
+```
+
+If you wish to include singleton SNPs (those that appear in only one isolate) then set `keep.singletons=FALSE`. However, this is currently advised against as these SNPs lead to a higher number of parameters in the model and do not provide information about shared ancestry.
+
+## Running hierBAPS
+
+We now need to decide how many levels of clustering we are interested in and the number of initial clusters to start from. It is a good idea to choose `n.pops` to be significantly larger than the number of clusters you expect.
+
+To run hierBAPS with $2$ levels and $20$ initial clusters we run
+
+```{r}
+hb.results <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, quiet = TRUE)
+head(hb.results$partition.df)
+```
+
+This produces a list which includes a data frame indicating the resulting partition of the isolates at the difference levels. The isolate names in this data frame are taken from the fasta headers and thus for plotting it is important that these match the isolate names in any tree used later. This function also outputs the log marginal likelihoods at the different levels of clustering.
+
+hierBAPS can also be run until the algorithm converges to a local optimum as
+
+```{r, eval=FALSE}
+hb.results <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, n.extra.rounds = Inf,
+                       quiet = TRUE)
+```
+
+We can also change the minimum cluster size as
+
+```{r, eval=FALSE}
+hb.results <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, min.cluster.size = 10,
+                       quiet = TRUE)
+```
+
+
+## Plotting results
+
+To plot the results it is useful to consider a tree of the same isolates. We clustered the example isolates using Iqtree [@Kalyaanamoorthy2017-go]. The ggtree [@Yu2017-bf] package then allows us to plot the results.
+
+First we need to load the newick file.
+
+```{r}
+newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
+iqtree <- phytools::read.newick(newick.file.name)
+```
+
+A simple coloured tree allows us to see the top level cluster assignment from hierBAPS.
+
+```{r}
+gg <- ggtree(iqtree, layout="circular")
+gg <- gg %<+% hb.results$partition.df
+gg <- gg + geom_tippoint(aes(color=factor(`level 1`)))
+gg
+```
+
+As there are many more clusters at the second level using colours to distguish them can get confusing. Instead we can label the tips with their corresponding colours.
+
+```{r}
+gg <- ggtree(iqtree, layout="circular", branch.length = "none")
+gg <- gg %<+% hb.results$partition.df
+gg <- gg + geom_tippoint(aes(color=factor(`level 1`)))
+gg <- gg + theme(legend.position="right")
+gg <- gg + scale_color_discrete(name="level 1")
+gg <- gg + geom_tiplab(aes(label=`level 2`), 
+                       size=1, align = TRUE, offset = 1)
+gg
+```
+
+We can also zoom into a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
+
+```{r}
+plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
+```
+
+Finnaly, we can inspect the log marginal likelihoods given for each level.
+
+```{r}
+hb.results$lml.list
+```
+
+## Saving results
+
+For runs that take a long time it is a good idea to save the output. We can save the partition file as
+
+```{r, eval=FALSE}
+write.csv(hb.results$partition.df, file="hierbaps_partition.csv", 
+          col.names = TRUE, row.names = FALSE)
+
+save_lml_logs(hb.results, "hierbaps_logML.txt")
+```
+
+## References
+
+---
+nocite: '@*'
+...
+
+##Appendix
+```{r}
+sessionInfo()
+```
