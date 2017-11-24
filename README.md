@@ -1,7 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+rhierbaps
+=========
+
 Installation
-============
+------------
 
 `rhierbaps` is currently available on github. It can be install with `devtools`
 
@@ -18,7 +21,7 @@ devtools::install_github("gtonkinhill/rhierbaps", build_vignettes = TRUE)
 ```
 
 Quick Start
-===========
+-----------
 
 Run hierBAPS.
 
