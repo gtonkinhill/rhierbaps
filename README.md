@@ -28,7 +28,6 @@ Run hierBAPS.
 ``` r
 # devtools::install_github('gtonkinhill/rhierbaps')
 library(rhierbaps)
-library(ggtree)
 
 fasta.file.name <- system.file("extdata", "seqs.fa", package = "rhierbaps")
 snp.matrix <- load_fasta(fasta.file.name)
@@ -51,7 +50,7 @@ The hierBAPS algorithm was introduced in (Cheng et al. 2013) and provides a meth
 
 1.  hierBAPS uses a uniform prior for K.
 2.  The prior for a site depend on the available snps, i.e. if a site only has 'AC', then the prior for 'ACGT' is (1/2, 1/2, 0, 0)
-3.  The initial sequence partiton is generated using hierarchical clustering with complete linkage based on a Hamming distance matrix.
+3.  The initial sequence partition is generated using hierarchical clustering with complete linkage based on a Hamming distance matrix.
 4.  The initial number of populations should be set much higher than the expected number of populations.
 5.  More search rounds of the algorithm can be added using the `n.extra.rounds` parameter.
 6.  To get reproducible results the seed in R must be set.
@@ -137,7 +136,7 @@ gg
 
 ![](inst/vignette-supp/unnamed-chunk-13-1.png)
 
-As there are many more clusters at the second level using colours to distguish them can get confusing. Instead we can label the tips with their corresponding colours.
+As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding colours.
 
 ``` r
 gg <- ggtree(iqtree, layout = "circular", branch.length = "none")
@@ -159,7 +158,7 @@ plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
 
 ![](inst/vignette-supp/unnamed-chunk-15-1.png)
 
-Finnaly, we can inspect the log marginal likelihoods given for each level.
+Finally, we can inspect the log marginal likelihoods given for each level.
 
 ``` r
 hb.results$lml.list

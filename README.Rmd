@@ -39,7 +39,6 @@ Run hierBAPS.
 ```{r, fig.width =8, fig.height=6, fig.align='center'}
 # devtools::install_github("gtonkinhill/rhierbaps")
 library(rhierbaps)
-library(ggtree)
 
 fasta.file.name <- system.file("extdata", "seqs.fa", package = "rhierbaps")
 snp.matrix <- load_fasta(fasta.file.name)
