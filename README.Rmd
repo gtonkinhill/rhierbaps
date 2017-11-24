@@ -17,6 +17,10 @@ knitr::opts_chunk$set(
   tidy=TRUE
 )
 ```
+
+[![Travis-CI Build Status](https://travis-ci.org/gtonkinhill/rhierbaps.svg?branch=master)](https://travis-ci.org/gtonkinhill/rhierbaps)
+
+
 # rhierbaps
 
 ## Installation
