@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 # rhierbaps
 
 ## Installation
-`rhierbaps` is currently available on github. It can be install with `devtools`
+`rhierbaps` is currently available on github. It can be installed with `devtools`
 ```{r, eval = FALSE}
 install.packages("devtools")
 

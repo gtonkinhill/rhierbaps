@@ -8,7 +8,7 @@ rhierbaps
 Installation
 ------------
 
-`rhierbaps` is currently available on github. It can be install with `devtools`
+`rhierbaps` is currently available on github. It can be installed with `devtools`
 
 ``` r
 install.packages("devtools")
@@ -138,7 +138,7 @@ gg
 
 ![](inst/vignette-supp/unnamed-chunk-13-1.png)
 
-As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding colours.
+As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding clusters.
 
 ``` r
 gg <- ggtree(iqtree, layout = "circular", branch.length = "none")
@@ -152,7 +152,7 @@ gg
 
 ![](inst/vignette-supp/unnamed-chunk-14-1.png)
 
-We can also zoom into a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
+We can also zoom in on a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
 
 ``` r
 plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
