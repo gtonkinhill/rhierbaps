@@ -5,9 +5,7 @@
 #'
 #' @param snp.matrix Character matrix of aligned sequences produced by \link{load_fasta}.
 #' @param max.depth Maximum depth of hierarchical search (default = 2).
-#' @param n.pops Maximum number of populations in the data (default = 5*number of expected pops)
-#' @param min.cluster.size Minimum cluster size. Below this the algorithm will not attempt to
-#' into further clusters.
+#' @param n.pops Maximum number of populations in the data (default = number of isolates/5)
 #' @param quiet Whether to suppress progress information (default=FALSE).
 #' @param n.extra.rounds The number of additional rounds to perform after the default hierBAPS
 #' settings (default=0). If set to Inf it will run until a local optimum is reached
@@ -23,14 +21,12 @@
 #'
 #' @export
 hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
-                     min.cluster.size=4, quiet=FALSE, n.extra.rounds=0, n.cores=1){
+                     quiet=FALSE, n.extra.rounds=0, n.cores=1){
 
   #Check inputs
   if (class(snp.matrix)!="matrix") stop("snp.matrix is not a matrix!")
   if ((!is.numeric(max.depth)) || (max.depth<1)) stop("Invalid max.depth! Must be a positive integer.")
   if ((!is.numeric(n.pops)) || (n.pops<1)) stop("Invalid n.pops! Must be a positive integer.")
-  if ((!is.numeric(min.cluster.size)) || (min.cluster.size<1)) stop("Invalid n.pops!
-                                                                    Must be a positive integer.")
   if (!is.logical(quiet)) stop("Invalid quiet! Must be one of TRUE/FALSE.")
   if ((!is.numeric(n.extra.rounds)) || (n.extra.rounds<0)) stop("Invalid n.extra.rounds!
                                                                 Must be a non-negative integer.")
@@ -52,6 +48,9 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
                  4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
                  1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,
                  2, 3, 4, 1, 2, 3, 4)
+  
+  #Don't split clusters with the less than 4 memebers
+  MIN.CLUSTER.SIZE <- 4
 
   #iterate over levels
   all.partition.matrix <- matrix(0, nrow=nrow(snp.matrix), ncol=max.depth)
@@ -83,7 +82,7 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
       cluid <- avail.cluster.ids[i]
       if(!quiet) print(paste(c("Current depth: ", cur.depth, " Cluster ID: ", cluid), collapse = ""))
 
-      if (sum(cur.part==cluid) < min.cluster.size){
+      if (sum(cur.part==cluid) < MIN.CLUSTER.SIZE){
         #we dont split any further.
         all.partition.matrix[cur.part==cluid, cur.depth+1] <- local.label.offset
         local.label.offset <- local.label.offset+1
@@ -128,7 +127,7 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
       }
     }
 
-    names(lml.list[[cur.depth+1]]) <- avail.cluster.ids
+    names(lml.list[[cur.depth+1]]) <- as.character(1:length(lml.list[[cur.depth+1]]))
 
   }
   names(lml.list) <- paste("Depth", seq(0, max.depth-1))
