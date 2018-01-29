@@ -86,6 +86,11 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
         #we dont split any further.
         all.partition.matrix[cur.part==cluid, cur.depth+1] <- local.label.offset
         local.label.offset <- local.label.offset+1
+        if(length(lml.list)<(cur.depth+1)){
+          lml.list[[cur.depth+1]] <- NA
+        } else {
+          lml.list[[cur.depth+1]] <- c(lml.list[[cur.depth+1]], NA)
+        }
         next
       }
 
@@ -127,7 +132,7 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
       }
     }
 
-    names(lml.list[[cur.depth+1]]) <- as.character(1:length(lml.list[[cur.depth+1]]))
+    names(lml.list[[cur.depth+1]]) <- avail.cluster.ids
 
   }
   names(lml.list) <- paste("Depth", seq(0, max.depth-1))
