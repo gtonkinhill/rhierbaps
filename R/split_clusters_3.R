@@ -18,7 +18,7 @@
 #' snp.object <- preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
-#' split_clusters_3(snp.object, partition)
+#' rhierbaps:::split_clusters_3(snp.object, partition)
 split_clusters_3 <- function(snp.object, partition, threshold=1e-5,
                              min.clust.size=20, n.cores=1){
   #At the moment this can't create new clusters. This is the same as in the original hierBAPS

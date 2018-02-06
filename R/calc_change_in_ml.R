@@ -15,7 +15,7 @@
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' indexes <- c(1:length(partition))[partition==2][1:5]
-#' calc_change_in_ml(snp.object, partition, indexes)
+#' rhierbaps:::calc_change_in_ml(snp.object, partition, indexes)
 #'
 calc_change_in_ml <- function(snp.object, partition, indexes){
   #some checks

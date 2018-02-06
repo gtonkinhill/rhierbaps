@@ -11,6 +11,7 @@
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' preproc_alignment(snp.matrix)
 #'
+#' @export
 preproc_alignment <- function(snp.matrix){
   if(class(snp.matrix)!="matrix") stop("snp.matrix is not a valid matrix")
 

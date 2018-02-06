@@ -5,17 +5,14 @@
 \title{hierBAPS}
 \usage{
 hierBAPS(snp.matrix, max.depth = 2, n.pops = floor(nrow(snp.matrix)/5),
-  min.cluster.size = 4, quiet = FALSE, n.extra.rounds = 0, n.cores = 1)
+  quiet = FALSE, n.extra.rounds = 0, n.cores = 1)
 }
 \arguments{
 \item{snp.matrix}{Character matrix of aligned sequences produced by \link{load_fasta}.}
 
 \item{max.depth}{Maximum depth of hierarchical search (default = 2).}
 
-\item{n.pops}{Maximum number of populations in the data (default = 5*number of expected pops)}
-
-\item{min.cluster.size}{Minimum cluster size. Below this the algorithm will not attempt to
-into further clusters.}
+\item{n.pops}{Maximum number of populations in the data (default = number of isolates/5)}
 
 \item{quiet}{Whether to suppress progress information (default=FALSE).}
 

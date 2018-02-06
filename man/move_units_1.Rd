@@ -33,5 +33,5 @@ snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"
 snp.object <- preproc_alignment(snp.matrix)
 tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 partition <- cutree(tmp.hclust, k = 20)
-move_units_1(snp.object, partition)
+rhierbaps:::move_units_1(snp.object, partition)
 }

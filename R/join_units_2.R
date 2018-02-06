@@ -17,7 +17,7 @@
 #' snp.object <- preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
-#' join_units_2(snp.object, partition)
+#' rhierbaps:::join_units_2(snp.object, partition)
 join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1){
 
   #some checks
