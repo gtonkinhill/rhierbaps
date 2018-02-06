@@ -108,11 +108,12 @@ hb.results <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, n.extra.rounds = 
     quiet = TRUE)
 ```
 
-We can also change the minimum cluster size as
+We can also check how long hierBAPS takes to run on the test dataset of 515 samples and 744 SNPs.
 
 ``` r
-hb.results <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, min.cluster.size = 10, 
-    quiet = TRUE)
+system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
+#>    user  system elapsed 
+#> 118.141  18.070 140.252
 ```
 
 Plotting results
