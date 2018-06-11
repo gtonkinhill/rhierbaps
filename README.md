@@ -56,6 +56,7 @@ The hierBAPS algorithm was introduced in (Cheng et al. 2013) and provides a meth
 4.  The initial number of populations should be set much higher than the expected number of populations.
 5.  More search rounds of the algorithm can be added using the `n.extra.rounds` parameter.
 6.  To get reproducible results the seed in R must be set.
+7.  When running larger datasets increasing R's stack size limit might be required. `options(expressions=10000)`
 
 Libraries
 ---------
@@ -112,8 +113,8 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
-#>    user  system elapsed 
-#> 118.141  18.070 140.252
+#>     user   system  elapsed 
+#>  151.086   15.831 5639.306
 ```
 
 Plotting results
@@ -146,8 +147,7 @@ gg <- ggtree(iqtree, layout = "circular", branch.length = "none")
 gg <- gg %<+% hb.results$partition.df
 gg <- gg + geom_tippoint(aes(color = factor(`level 1`)))
 gg <- gg + theme(legend.position = "right")
-gg <- gg + scale_color_discrete(name = "level 1")
-gg <- gg + geom_tiplab(aes(label = `level 2`), size = 1, align = TRUE, offset = 1)
+gg <- gg + geom_tiplab(aes(label = `level 2`), size = 1, offset = 1)
 gg
 ```
 

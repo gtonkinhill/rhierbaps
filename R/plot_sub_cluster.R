@@ -13,8 +13,9 @@
 #' newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
 #' tree <- phytools::read.newick(newick.file.name)
 #' hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
-#' plot_sub_cluster(hb.results, tree, level = 1, sub.cluster = 9)
-#'
+#' \dontrun{
+#' plot_sub_cluster(hb.result, tree, level = 1, sub.cluster = 9)
+#' }
 #' @export
 plot_sub_cluster <- function(hb.object, tree, level, sub.cluster){
   #Checks
@@ -34,7 +35,7 @@ plot_sub_cluster <- function(hb.object, tree, level, sub.cluster){
   #Need to create a tempfile to supress the output of gzoom
   ff <- tempfile()
   png(filename=ff)
-  gg2 <- gzoom(tree, focus=which(tree$tip.label %in% cluster.isolate))
+  gg2 <- ggtree::gzoom(tree, focus=which(tree$tip.label %in% cluster.isolate))
   dev.off()
   unlink(ff)
 
