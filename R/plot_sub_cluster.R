@@ -10,8 +10,10 @@
 #'
 #' @examples
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
+#' newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
+#' tree <- phytools::read.newick(newick.file.name)
 #' hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
-#' save_lml_logs(hb.result, "output_file.txt")
+#' plot_sub_cluster(hb.results, tree, level = 1, sub.cluster = 9)
 #'
 #' @export
 plot_sub_cluster <- function(hb.object, tree, level, sub.cluster){
@@ -39,10 +41,9 @@ plot_sub_cluster <- function(hb.object, tree, level, sub.cluster){
   temp_column_id <- paste(c("factor(`level ", level, "`)"), collapse = "")
 
   p2 <- gg2$p2
-  p2 <- p2 %<+% hb.results$partition.df
-  p2 <- p2 + geom_tippoint(aes_string(color=temp_column_id))
-  p2 <- p2 + theme(legend.position="right")
-  p2 <- p2 + scale_color_discrete(name=paste("level", level))
+  p2 <- p2 %<+% hb.object$partition.df
+  p2 <- p2 + geom_tippoint(ggplot2::aes_string(color=temp_column_id))
+  p2 <- p2+ ggplot2::labs(color=temp_column_id) + theme(legend.position="right") 
 
   return(multiplot(gg2$p1, p2, ncol = 2))
 }

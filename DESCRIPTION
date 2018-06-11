@@ -9,11 +9,13 @@ Description: This package implements the hierBAPS algorithm of Cheng et al 2013.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: ape,
+Imports: 
+    ape,
     dplyr,
     gmp,
     purrr,
-    utils
+    utils,
+    ggplot2
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,

@@ -24,8 +24,14 @@ preproc_alignment <- function(snp.matrix){
   #TODO: should we be getting rid of unique SNPs here?
   #now ignore conserved columns
   keep <- colSums(prior>0)>1
-  snp.matrix <- snp.matrix[, keep]
-  prior <- prior[, keep]
+  
+  if(sum(keep)==0){
+    #all columns are conserved
+    return(NA)
+  }
+  
+  snp.matrix <- snp.matrix[, keep, drop=FALSE]
+  prior <- prior[, keep, drop=FALSE]
 
   #finally generate a matrix for the prior nt values
   prior <- 1*(prior>0)

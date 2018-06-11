@@ -60,6 +60,9 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
 
     if (cur.depth==0){
       snp.object <- preproc_alignment(snp.matrix)
+      if(is.na(snp.object[[1]])){
+        stop("All sites are conserved!")
+      }
       cur.part <- rep(1, snp.object$n.seq)
       avail.cluster.ids <- 1
       snp.object$heds <- rownames(snp.matrix)
@@ -98,7 +101,20 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
         tmp.snp.object <- snp.object
       } else {
         tmp.snp.object <- preproc_alignment(snp.object$data[cur.part==cluid, ])
+        if(is.na(tmp.snp.object[[1]])){
+          #all sites are conserved at this partition so dont split further
+          all.partition.matrix[cur.part==cluid, cur.depth+1] <- local.label.offset
+          local.label.offset <- local.label.offset+1
+          if(length(lml.list)<(cur.depth+1)){
+            lml.list[[cur.depth+1]] <- NA
+          } else {
+            lml.list[[cur.depth+1]] <- c(lml.list[[cur.depth+1]], NA)
+          }
+          next
+        }
       }
+      
+      
 
       tmp.z.hclust <- hclust(as.dist(tmp.snp.object$dist), method = 'complete')
 
@@ -109,7 +125,7 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
         tmp.init.part <- cutree(tmp.z.hclust, k = tmp.num)
       }
 
-      temp_partition = model_search_parallel(tmp.snp.object, tmp.init.part, round.types,
+      temp_partition = rhierbaps:::model_search_parallel(tmp.snp.object, tmp.init.part, round.types,
                                              quiet, n.extra.rounds, n.cores)
 
       if (!quiet){
