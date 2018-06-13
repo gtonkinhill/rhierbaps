@@ -39,7 +39,7 @@ preproc_alignment <- function(snp.matrix){
 
   #Calculate hamming distance
   orig.dist <- as.matrix(ape::dist.dna(ape::as.DNAbin(snp.matrix),
-                                       model = "N"))
+                                       model = "N", pairwise.deletion = TRUE))
 
   return(list(
     n.seq = n.seq,
