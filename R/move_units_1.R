@@ -15,11 +15,14 @@
 #' a boolean value indicating whether a move increased the marginal likelihood.
 #'
 #' @examples
+#' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' snp.object <- preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' rhierbaps:::move_units_1(snp.object, partition)
+#' }
+#' 
 move_units_1 <- function(snp.object, partition, threshold=1e-5,
                          frac.clust.searched=0.3,
                          min.clust.size=20,
@@ -34,7 +37,7 @@ move_units_1 <- function(snp.object, partition, threshold=1e-5,
   clusters <- unique(partition)
   cluster_size <- purrr::map_int(clusters, ~ sum(partition==.x))
   names(cluster_size) <- clusters
-  max_ml <- rhierbaps::calc_log_ml(snp.object, partition)
+  max_ml <- calc_log_ml(snp.object, partition)
   max_partition <- partition
 
   #identify the most divereged isolates of each cluster as candidates for moving.
@@ -46,7 +49,7 @@ move_units_1 <- function(snp.object, partition, threshold=1e-5,
       d <- snp.object$dist[partition==c, partition==c]
       diag(d) <- NA
       mean.dist <- rowMeans(d, na.rm = TRUE)
-      return(index[mean.dist>quantile(mean.dist, probs=(1-frac.clust.searched))])
+      return(index[mean.dist > stats::quantile(mean.dist, probs=(1-frac.clust.searched))])
     } else {
       #small cluster so consider all isolates
       return(c(1:length(partition))[partition==c])
@@ -58,7 +61,7 @@ move_units_1 <- function(snp.object, partition, threshold=1e-5,
     best.cluster <- calc_change_in_ml(snp.object, max_partition, i)
     temp_partition <- max_partition
     temp_partition[i] <- as.integer(best.cluster)
-    temp_lml <- rhierbaps::calc_log_ml(snp.object, temp_partition)
+    temp_lml <- calc_log_ml(snp.object, temp_partition)
     #If improvment above threshold make the swap
     if(temp_lml > (max_ml+threshold)){
       max_ml <- temp_lml

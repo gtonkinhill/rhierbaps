@@ -1,15 +1,15 @@
 Package: rhierbaps
 Type: Package
-Title: rhierbaps
-Version: 0.1.0
+Title: An R Implementation of the hierBAPS Algorithm
+Version: 1.0.0
 Author: c(
-    person("Gerry", "Tonkin-Hill", email = "gqt20@cam.ac.uk", role = "cre"))
-Maintainer: Gerry Tonkin-Hill <gqt20@cam.ac.uk>
-Description: This package implements the hierBAPS algorithm of Cheng et al 2013.
+    person("Gerry", "Tonkin-Hill", email = "g.tonkinhill@gmail.com", role = "cre"))
+Maintainer: Gerry Tonkin-Hill <g.tonkinhill@gmail.com>
+Description: Implements the hierBAPS algorithm of Cheng et al 2013 with improved defaults and plotting capabilities. Singletons SNPs are removed by default.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
     ape,
     dplyr,
     gmp,
@@ -20,5 +20,8 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     ggtree,
-    phytools
+    phytools,
+    testthat
 VignetteBuilder: knitr
+URL: https://github.com/gtonkinhill/rhierbaps
+BugReports: https://github.com/gtonkinhill/rhierbaps/issues

@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+cran-comments.md
+.travis.yml
+README.Rmd
+.gitignore

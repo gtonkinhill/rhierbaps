@@ -19,11 +19,11 @@ plot_sub_cluster(hb.object, tree, level, sub.cluster)
 Creates a zoom plot using ggtree focusing on a cluster.
 }
 \examples{
+\dontrun{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
 tree <- phytools::read.newick(newick.file.name)
 hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
-\dontrun{
 plot_sub_cluster(hb.result, tree, level = 1, sub.cluster = 9)
 }
 }

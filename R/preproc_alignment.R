@@ -1,17 +1,18 @@
 #' preproc_alignment
 #'
-#' Preprocessed the snp matrix for hierBAPS
+#' Preprocessed the snp matrix for hierBAPS.
 #'
 #'
 #' @param snp.matrix A matrix containing SNP data. Rows indicate isolates and columns loci.
 #'
-#' @return
+#' @return an snp.object
 #'
 #' @examples
+#' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' preproc_alignment(snp.matrix)
+#' }
 #'
-#' @export
 preproc_alignment <- function(snp.matrix){
   if(class(snp.matrix)!="matrix") stop("snp.matrix is not a valid matrix")
 

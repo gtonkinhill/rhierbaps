@@ -9,11 +9,11 @@
 #' @param sub.cluster An integer representing the subcluster to be considered.
 #'
 #' @examples
+#' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
 #' tree <- phytools::read.newick(newick.file.name)
 #' hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
-#' \dontrun{
 #' plot_sub_cluster(hb.result, tree, level = 1, sub.cluster = 9)
 #' }
 #' @export
@@ -28,23 +28,23 @@ plot_sub_cluster <- function(hb.object, tree, level, sub.cluster){
 
   level <- level+1
   if(!("ggtree" %in%
-       rownames(installed.packages()))) stop("This function requires ggtree to be installed")
+       rownames(utils::installed.packages()))) stop("This function requires ggtree to be installed")
 
   cluster.isolate <- hb.object$partition.df$Isolate[hb.object$partition.df[,level]==sub.cluster]
 
   #Need to create a tempfile to supress the output of gzoom
   ff <- tempfile()
-  png(filename=ff)
+  grDevices::png(filename=ff)
   gg2 <- ggtree::gzoom(tree, focus=which(tree$tip.label %in% cluster.isolate))
-  dev.off()
+  grDevices::dev.off()
   unlink(ff)
 
   temp_column_id <- paste(c("factor(`level ", level, "`)"), collapse = "")
 
   p2 <- gg2$p2
-  p2 <- p2 %<+% hb.object$partition.df
-  p2 <- p2 + geom_tippoint(ggplot2::aes_string(color=temp_column_id))
-  p2 <- p2+ ggplot2::labs(color=temp_column_id) + theme(legend.position="right") 
+  p2 <- ggtree::`%<+%`(p2, hb.object$partition.df)
+  p2 <- p2 + ggtree::geom_tippoint(ggplot2::aes_string(color=temp_column_id))
+  p2 <- p2+ ggplot2::labs(color=temp_column_id) + ggplot2::theme(legend.position="right") 
 
-  return(multiplot(gg2$p1, p2, ncol = 2))
+  return(ggtree::multiplot(gg2$p1, p2, ncol = 2))
 }

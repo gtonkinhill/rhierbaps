@@ -27,9 +27,12 @@ Peform an iteration of the third move in the algorithm. That is split cluster in
 and re-allocate one sub-cluster.
 }
 \examples{
+\dontrun{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 snp.object <- preproc_alignment(snp.matrix)
 tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 partition <- cutree(tmp.hclust, k = 20)
-rhierbaps:::split_clusters_3(snp.object, partition)
+split_clusters_3(snp.object, partition)
+}
+
 }

@@ -24,9 +24,12 @@ Peform an iteration of the second move in the algorithm. That is combine two clu
 to improve the marginal likelihood.
 }
 \examples{
+\dontrun{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 snp.object <- preproc_alignment(snp.matrix)
 tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 partition <- cutree(tmp.hclust, k = 20)
 rhierbaps:::join_units_2(snp.object, partition)
+}
+
 }

@@ -21,4 +21,5 @@ hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
 save_lml_logs(hb.result, "output_file.txt")
 }
 
+
 }

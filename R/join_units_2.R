@@ -13,18 +13,21 @@
 #' a boolean value indicating whether a move increased the marginal likelihood.
 #'
 #' @examples
+#' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' snp.object <- preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' rhierbaps:::join_units_2(snp.object, partition)
+#' }
+#' 
 join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1){
 
   #some checks
   if (ncol(snp.object$prior)!=ncol(snp.object$data)) stop("ncol mismatch bwtn prior and data!")
   if (length(partition)!=nrow(snp.object$data)) stop("mismatch bwtn partition and data!")
 
-  max_ml <- rhierbaps::calc_log_ml(snp.object, partition)
+  max_ml <- calc_log_ml(snp.object, partition)
   is.improved <- FALSE
   clusters <- unique(partition)
 

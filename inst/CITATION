@@ -1,0 +1,24 @@
+citHeader("Currently, the best way to cite rhierbaps in publications is to use:")
+
+citEntry(entry = "Article",
+title        = "Hierarchical and spatially explicit clustering of {DNA} sequences
+              with {BAPS} software",
+author       = personList(as.person("Lu Cheng"),
+                 as.person("Thomas R Connor"),
+                 as.person("Jukka Siren"),
+                 as.person("David M. Aanensen"),
+                 as.person("Jukka Corander")),
+journal      = "Mol. Biol. Evol.",
+year         = "2013",
+volume       = "30",
+number       = "5",
+pages        = "1224--1228",
+url          = "http://dx.doi.org/10.1093/molbev/mst028",
+
+textVersion  =
+paste("Cheng, Lu, Thomas R. Connor, Jukka Sirén, David M. Aanensen, and Jukka Corander. 2013.",
+"Hierarchical and Spatially Explicit Clustering of DNA Sequences with BAPS Software.",
+"Molecular Biology and Evolution 30 (5): 1224–28.")
+)
+
+

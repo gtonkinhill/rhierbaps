@@ -20,11 +20,13 @@ the best cluster to move indexes to.
 Calculate the change in the log marginal likelihood after moving index to each possible cluster
 }
 \examples{
+\dontrun{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-snp.object <- preproc_alignment(snp.matrix)
+snp.object <- .preproc_alignment(snp.matrix)
 tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 partition <- cutree(tmp.hclust, k = 20)
 indexes <- c(1:length(partition))[partition==2][1:5]
 rhierbaps:::calc_change_in_ml(snp.object, partition, indexes)
+}
 
 }

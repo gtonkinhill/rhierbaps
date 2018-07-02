@@ -12,16 +12,28 @@
 #' (this might take a long time).
 #' @param n.cores The number of cores to use.
 #'
-#' @return
+#' @return an optimised partition and marginal llk
 #'
 #' @examples
+#' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' snp.object <- preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' n.pops <- 20
-#' round.types <- c(2*rep(1, n.pops),1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 3, 4,3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4,3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4, 3, 4, 3, 4, 1, 1, 1, 1, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2,3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3,4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4)
-#' rhierbaps:::model_search_parallel(snp.object, partition, round.types)
+#' round.types <- c(2*rep(1, n.pops),1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+#'  1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+#'  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1,
+#'  1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 3, 4,3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4,
+#'  3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,
+#'  4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4,
+#'  3, 4, 3, 4, 1, 1, 1, 1, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3,
+#'  4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2,
+#'  3, 4, 1, 2,3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,
+#'  2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4,
+#'  1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4)
+#' model_search_parallel(snp.object, partition, round.types)
+#' }
 #'
 model_search_parallel <- function(snp.object, partition, round.types,
                                   quiet=FALSE, n.extra.rounds=0, n.cores=1){
@@ -29,7 +41,7 @@ model_search_parallel <- function(snp.object, partition, round.types,
 
   was.updated <- rep(TRUE, 4)
   move.count <- 0
-  max.ml <- rhierbaps::calc_log_ml(snp.object, partition)
+  max.ml <- calc_log_ml(snp.object, partition)
   if(!quiet){
     cat('\r', paste(c(
       "Round: ", move.count, "/", length(round.types), " Type: ", "none", " Log marginal likelihood: ", max.ml
@@ -96,7 +108,7 @@ model_search_parallel <- function(snp.object, partition, round.types,
       cat('\r', paste(c(
         "Round: ", move.count, "/", length(round.types), " Type: ", r, " Log marginal likelihood: ", max.ml
       ), collapse = ""))
-      flush.console()
+      utils::flush.console()
     }
 
     #Check for local convergence
@@ -105,5 +117,5 @@ model_search_parallel <- function(snp.object, partition, round.types,
       break
     }
   }
-  return(list(partition=partition, lml=rhierbaps::calc_log_ml(snp.object, partition)))
+  return(list(partition=partition, lml=calc_log_ml(snp.object, partition)))
 }
