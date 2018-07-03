@@ -7,7 +7,7 @@
 plot_sub_cluster(hb.object, tree, level, sub.cluster)
 }
 \arguments{
-\item{hb.object}{The resulting object from runnign hierBAPS}
+\item{hb.object}{The resulting object from running hierBAPS}
 
 \item{tree}{A phylo tree object to plot}
 

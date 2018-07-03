@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- preproc_alignment(snp.matrix)
+#' snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' n.pops <- 20
@@ -42,6 +42,7 @@ model_search_parallel <- function(snp.object, partition, round.types,
   was.updated <- rep(TRUE, 4)
   move.count <- 0
   max.ml <- calc_log_ml(snp.object, partition)
+  comb.chache <- NULL
   if(!quiet){
     cat('\r', paste(c(
       "Round: ", move.count, "/", length(round.types), " Type: ", "none", " Log marginal likelihood: ", max.ml
@@ -68,13 +69,16 @@ model_search_parallel <- function(snp.object, partition, round.types,
       if(!update$is.improved){
         was.updated[[1]] <- FALSE
       } else{
+        comb.chache <- NULL
         partition <- update$partition
         max.ml <- update$lml
         was.updated <- rep(TRUE, 4)
       }
     } else if(r==2 && was.updated[[2]]){
+      comb.chache <- NULL
       update <- join_units_2(snp.object, partition,
-                             n.cores=n.cores)
+                             n.cores=n.cores, comb.chache=comb.chache)
+      comb.chache <- update$comb.chache
       if(!update$is.improved){
         was.updated[[2]] <- FALSE
       } else{
@@ -88,6 +92,7 @@ model_search_parallel <- function(snp.object, partition, round.types,
       if(!update$is.improved){
         was.updated[[3]] <- FALSE
       } else{
+        comb.chache <- NULL
         partition <- update$partition
         max.ml <- update$lml
         was.updated <- rep(TRUE, 4)
@@ -98,6 +103,7 @@ model_search_parallel <- function(snp.object, partition, round.types,
       if(!update$is.improved){
         was.updated[[4]] <- FALSE
       } else{
+        comb.chache <- NULL
         partition <- update$partition
         max.ml <- update$lml
         was.updated <- rep(TRUE, 4)

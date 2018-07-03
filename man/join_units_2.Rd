@@ -4,7 +4,8 @@
 \alias{join_units_2}
 \title{join_units_2}
 \usage{
-join_units_2(snp.object, partition, threshold = 1e-05, n.cores = 1)
+join_units_2(snp.object, partition, threshold = 1e-05, n.cores = 1,
+  comb.chache = NULL)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}
@@ -14,6 +15,8 @@ join_units_2(snp.object, partition, threshold = 1e-05, n.cores = 1)
 \item{threshold}{The increase in marginal log likelihood required to accept a move.}
 
 \item{n.cores}{The number of cores to use.}
+
+\item{comb.chache}{a matrix recording previous marginal llks of combining clusters}
 }
 \value{
 The best partition after combining two clusters as well as

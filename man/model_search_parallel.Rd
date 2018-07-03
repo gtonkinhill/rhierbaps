@@ -31,7 +31,7 @@ Clusters DNA alignment using independent loci model
 \examples{
 \dontrun{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-snp.object <- preproc_alignment(snp.matrix)
+snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
 tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 partition <- cutree(tmp.hclust, k = 20)
 n.pops <- 20

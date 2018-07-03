@@ -3,7 +3,7 @@
 #' Creates a zoom plot using ggtree focusing on a cluster.
 #'
 #'
-#' @param hb.object The resulting object from runnign hierBAPS
+#' @param hb.object The resulting object from running hierBAPS
 #' @param tree A phylo tree object to plot
 #' @param level The level of the subcluster to be considered.
 #' @param sub.cluster An integer representing the subcluster to be considered.
