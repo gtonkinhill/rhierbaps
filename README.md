@@ -114,7 +114,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#> 111.830  11.784 124.660
+#>  80.725   9.164  90.537
 ```
 
 Plotting results
