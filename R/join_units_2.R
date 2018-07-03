@@ -16,7 +16,7 @@
 #' @examples
 #' \dontrun{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- preproc_alignment(snp.matrix)
+#' snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
 #' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
 #' partition <- cutree(tmp.hclust, k = 20)
 #' rhierbaps:::join_units_2(snp.object, partition)
@@ -28,7 +28,7 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   if (ncol(snp.object$prior)!=ncol(snp.object$data)) stop("ncol mismatch bwtn prior and data!")
   if (length(partition)!=nrow(snp.object$data)) stop("mismatch bwtn partition and data!")
 
-  max_ml <- calc_log_ml(snp.object, partition)
+  max_ml <- rhierbaps:::calc_log_ml(snp.object, partition)
   is.improved <- FALSE
   clusters <- unique(partition)
 
@@ -46,7 +46,7 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   temp_mls <- parallel::mcmapply(function(p1, p2){
     temp_partition <- partition
     temp_partition[temp_partition==p2] <- p1
-    return(calc_log_ml(snp.object, temp_partition))
+    return(rhierbaps:::calc_log_ml(snp.object, temp_partition))
   }, temp.combinations[1,], temp.combinations[2,], mc.cores = n.cores)
   
   comb.chache[t(temp.combinations)] <- temp_mls
@@ -56,15 +56,21 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   if(comb.chache[arg.max[[1]], arg.max[[2]]] > (max_ml+threshold)){
     partition[partition==arg.max[[2]]] <- arg.max[[1]]
     is.improved <- TRUE
-    diff <- comb.chache[arg.max[[1]], arg.max[[2]]] - max_ml 
+    diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
+               max_ml + 
+               2*log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-1,
+                                    method = "lookup.or.store")) - 
+               log(gmp::Stirling2(nrow(snp.object$data), length(clusters),
+                                  method = "lookup.or.store")) -
+               log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-2,
+                                  method = "lookup.or.store"))
+    )
     max_ml <- comb.chache[arg.max[[1]], arg.max[[2]]]
     comb.chache <- comb.chache + diff
     comb.chache[arg.max[[1]], ] <- NA
     comb.chache[arg.max[[2]], ] <- NA
     comb.chache[, arg.max[[1]]] <- NA
     comb.chache[, arg.max[[2]]] <- NA
-  } else {
-    comb.chache[t(temp.combinations)] <- NA
   }
 
   return(list(partition=partition, is.improved=is.improved, lml=max_ml, comb.chache=comb.chache))
