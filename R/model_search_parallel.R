@@ -75,7 +75,6 @@ model_search_parallel <- function(snp.object, partition, round.types,
         was.updated <- rep(TRUE, 4)
       }
     } else if(r==2 && was.updated[[2]]){
-      comb.chache <- NULL
       update <- join_units_2(snp.object, partition,
                              n.cores=n.cores, comb.chache=comb.chache)
       comb.chache <- update$comb.chache

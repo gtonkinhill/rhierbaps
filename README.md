@@ -39,9 +39,9 @@ head(hb.results$partition.df)
 #> 1       1       1       1
 #> 2       2       1       1
 #> 3       3       1       1
-#> 4       4       2       5
-#> 5       5       3       9
-#> 6       6       3       9
+#> 4       4       2       7
+#> 5       5       3      11
+#> 6       6       3      11
 ```
 
 The hierBAPS algorithm was introduced in (Cheng et al. 2013) and provides a method for hierarchically clustering DNA sequence data to reveal nested population structure. Previously the algorithm was available as a compiled MATLAB binary. We provide a convenient R implementation and include a number of useful additional options including the ability to use multiple cores, save the log marginal likelihood scores and run the algorithm until local convergence. Furthermore, we provide a wrapper to a ggtree plotting function allowing for easy exploration of sub-clusters.
@@ -95,9 +95,9 @@ head(hb.results$partition.df)
 #> 1       1       1       1
 #> 2       2       1       1
 #> 3       3       1       1
-#> 4       4       2       5
-#> 5       5       3       9
-#> 6       6       3       9
+#> 4       4       2       7
+#> 5       5       3      11
+#> 6       6       3      11
 ```
 
 This produces a list which includes a data frame indicating the resulting partition of the isolates at the difference levels. The isolate names in this data frame are taken from the fasta headers and thus for plotting it is important that these match the isolate names in any tree used later. This function also outputs the log marginal likelihoods at the different levels of clustering.
@@ -113,8 +113,8 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
-#>     user   system  elapsed 
-#>  151.086   15.831 5639.306
+#>    user  system elapsed 
+#>  97.945  11.259 110.526
 ```
 
 Plotting results
@@ -171,7 +171,7 @@ hb.results$lml.list
 #> 
 #> $`Depth 1`
 #>          1          2          3          4          5          6 
-#> -2121.8602 -4012.3594 -4237.7634 -3095.1866 -1525.7361 -3180.7573 
+#> -2154.1142 -4012.3594 -4286.4004 -3095.1866 -1525.7361 -3180.7573 
 #>          7          8          9         10         11         12 
 #> -4015.5022 -2104.5238 -1736.0193  -779.7693  -810.5962  -688.5221 
 #>         13 

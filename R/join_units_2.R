@@ -51,7 +51,7 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   
   comb.chache[t(temp.combinations)] <- temp_mls
 
-  arg.max <- which(comb.chache == max(comb.chache, na.rm = TRUE), arr.ind = TRUE)
+  arg.max <- which(comb.chache == max(comb.chache, na.rm = TRUE), arr.ind = TRUE)[1,]
 
   if(comb.chache[arg.max[[1]], arg.max[[2]]] > (max_ml+threshold)){
     partition[partition==arg.max[[2]]] <- arg.max[[1]]
