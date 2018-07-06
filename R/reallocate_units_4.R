@@ -14,14 +14,6 @@
 #' @return The best partition after splitting a cluster and re-allocating as well as
 #' a boolean value indicating whether a move increased the marginal likelihood.
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = 20)
-#' rhierbaps:::reallocate_units_4(snp.object, partition)
-#' }
 reallocate_units_4 <- function(snp.object, partition, threshold=1e-5,
                                min.clust.size=20, split=FALSE,
                                n.cores=1){

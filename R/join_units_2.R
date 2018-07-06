@@ -13,22 +13,13 @@
 #' @return The best partition after combining two clusters as well as
 #' a boolean value indicating whether a move increased the marginal likelihood.
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = 20)
-#' rhierbaps:::join_units_2(snp.object, partition)
-#' }
-#' 
 join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.chache=NULL){
 
   #some checks
   if (ncol(snp.object$prior)!=ncol(snp.object$data)) stop("ncol mismatch bwtn prior and data!")
   if (length(partition)!=nrow(snp.object$data)) stop("mismatch bwtn partition and data!")
 
-  max_ml <- rhierbaps:::calc_log_ml(snp.object, partition)
+  max_ml <- calc_log_ml(snp.object, partition)
   is.improved <- FALSE
   clusters <- unique(partition)
 
@@ -46,7 +37,7 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   temp_mls <- parallel::mcmapply(function(p1, p2){
     temp_partition <- partition
     temp_partition[temp_partition==p2] <- p1
-    return(rhierbaps:::calc_log_ml(snp.object, temp_partition))
+    return(calc_log_ml(snp.object, temp_partition))
   }, temp.combinations[1,], temp.combinations[2,], mc.cores = n.cores)
   
   comb.chache[t(temp.combinations)] <- temp_mls

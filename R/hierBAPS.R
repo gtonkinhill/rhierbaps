@@ -16,7 +16,7 @@
 #' to hierarchical clusters as well as the log marginal likelihoods for each level.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' system.time({hb <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, quiet=FALSE)})
 #' }

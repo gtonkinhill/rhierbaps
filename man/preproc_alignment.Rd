@@ -15,10 +15,3 @@ an snp.object
 \description{
 Preprocessed the snp matrix for hierBAPS.
 }
-\examples{
-\dontrun{
-snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-preproc_alignment(snp.matrix)
-}
-
-}

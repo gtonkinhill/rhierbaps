@@ -28,12 +28,3 @@ a boolean value indicating whether a move increased the marginal likelihood.
 Peform an iteration of the fourth move in the algorithm. That is split cluster into n
 subclusters and re-allocate one sub-cluster.
 }
-\examples{
-\dontrun{
-snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-snp.object <- preproc_alignment(snp.matrix)
-tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-partition <- cutree(tmp.hclust, k = 20)
-rhierbaps:::reallocate_units_4(snp.object, partition)
-}
-}

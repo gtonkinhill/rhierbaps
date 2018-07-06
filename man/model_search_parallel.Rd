@@ -28,25 +28,3 @@ an optimised partition and marginal llk
 \description{
 Clusters DNA alignment using independent loci model
 }
-\examples{
-\dontrun{
-snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
-tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-partition <- cutree(tmp.hclust, k = 20)
-n.pops <- 20
-round.types <- c(2*rep(1, n.pops),1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
- 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
- 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1,
- 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 3, 4,3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4,
- 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,
- 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4,
- 3, 4, 3, 4, 1, 1, 1, 1, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3,
- 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2,
- 3, 4, 1, 2,3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,
- 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4,
- 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4)
-model_search_parallel(snp.object, partition, round.types)
-}
-
-}

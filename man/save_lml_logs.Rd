@@ -15,11 +15,10 @@ save_lml_logs(hb.object, file)
 Saves the log marginal likelihoods to a text file.
 }
 \examples{
-\dontrun{
+\donttest{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
-save_lml_logs(hb.result, "output_file.txt")
+save_lml_logs(hb.result,  file.path(tempdir(), "output_file.txt"))
 }
-
 
 }

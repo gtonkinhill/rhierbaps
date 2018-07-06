@@ -17,13 +17,3 @@ The log marginal likelihood of the given partition.
 \description{
 Calculate the log marginal likelihood assuming a Multinomial-Dirichlet distribution
 }
-\examples{
-\dontrun{
-snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-snp.object <- preproc_alignment(snp.matrix)
-tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-partition <- cutree(tmp.hclust, k = floor(snp.object$n.seq/2))
-calc_log_ml(snp.object, partition)
-}
-
-}

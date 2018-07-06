@@ -14,27 +14,6 @@
 #'
 #' @return an optimised partition and marginal llk
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- rhierbaps:::preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = 20)
-#' n.pops <- 20
-#' round.types <- c(2*rep(1, n.pops),1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-#'  1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-#'  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1,
-#'  1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 3, 4,3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4,
-#'  3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,
-#'  4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3,4, 3, 4, 3, 4,
-#'  3, 4, 3, 4, 1, 1, 1, 1, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3,
-#'  4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2,
-#'  3, 4, 1, 2,3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,
-#'  2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,1, 2, 3, 4, 1, 2, 3, 4,
-#'  1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1,2, 3, 4, 1, 2, 3, 4)
-#' model_search_parallel(snp.object, partition, round.types)
-#' }
-#'
 model_search_parallel <- function(snp.object, partition, round.types,
                                   quiet=FALSE, n.extra.rounds=0, n.cores=1){
   if(!all(round.types %in% c(1,2,3,4))) stop("Invalid round type!")

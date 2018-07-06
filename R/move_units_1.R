@@ -14,15 +14,6 @@
 #' @return The best partition after moving units from one cluster to another as well as
 #' a boolean value indicating whether a move increased the marginal likelihood.
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = 20)
-#' rhierbaps:::move_units_1(snp.object, partition)
-#' }
-#' 
 move_units_1 <- function(snp.object, partition, threshold=1e-5,
                          frac.clust.searched=0.3,
                          min.clust.size=20,

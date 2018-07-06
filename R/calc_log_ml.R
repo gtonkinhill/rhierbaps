@@ -8,15 +8,6 @@
 #'
 #' @return The log marginal likelihood of the given partition.
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = floor(snp.object$n.seq/2))
-#' calc_log_ml(snp.object, partition)
-#' }
-#'
 calc_log_ml <- function(snp.object, partition){
   #some checks
   if (ncol(snp.object$prior)!=ncol(snp.object$data)) stop("ncol mismatch bwtn prior and data!")

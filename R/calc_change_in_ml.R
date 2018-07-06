@@ -9,16 +9,6 @@
 #'
 #' @return the best cluster to move indexes to.
 #'
-#' @examples
-#' \dontrun{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
-#' snp.object <- .preproc_alignment(snp.matrix)
-#' tmp.hclust <- hclust(as.dist(snp.object$dist), method = 'complete')
-#' partition <- cutree(tmp.hclust, k = 20)
-#' indexes <- c(1:length(partition))[partition==2][1:5]
-#' rhierbaps:::calc_change_in_ml(snp.object, partition, indexes)
-#'}
-#'
 calc_change_in_ml <- function(snp.object, partition, indexes){
   #some checks
   if (ncol(snp.object$prior)!=ncol(snp.object$data)) stop("ncol mismatch bwtn prior and data!")

@@ -9,7 +9,7 @@
 #' @param sub.cluster An integer representing the subcluster to be considered.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 #' newick.file.name <- system.file("extdata", "seqs.fa.treefile", package = "rhierbaps")
 #' tree <- phytools::read.newick(newick.file.name)

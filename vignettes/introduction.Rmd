@@ -130,10 +130,10 @@ hb.results$lml.list
 For runs that take a long time it is a good idea to save the output. We can save the partition file as
 
 ```{r, eval=FALSE}
-write.csv(hb.results$partition.df, file="hierbaps_partition.csv", 
+write.csv(hb.results$partition.df, file=file.path(tempdir(), "hierbaps_partition.csv"), 
           col.names = TRUE, row.names = FALSE)
 
-save_lml_logs(hb.results, "hierbaps_logML.txt")
+save_lml_logs(hb.results,  file.path(tempdir(), "hierbaps_logML.txt"))
 ```
 
 ## References
