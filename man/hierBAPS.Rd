@@ -30,6 +30,9 @@ to hierarchical clusters as well as the log marginal likelihoods for each level.
 Runs the hierBAPS algorithm of Cheng et al. 2013
 }
 \examples{
+snp.matrix <- load_fasta(system.file("extdata", "small_seqs.fa", package = "rhierbaps"))
+hb <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, quiet=FALSE)
+
 \donttest{
 snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
 system.time({hb <- hierBAPS(snp.matrix, max.depth=2, n.pops=20, quiet=FALSE)})

@@ -5,6 +5,8 @@ This is a resubmission. In this version I have:
 * Improved the title and description as requested
 * Removed examples for functions that were not exported and replaced dontrun with donttest
 * Amended examples and vignettes that were writing to the users filespace
+* Added quotes around MATLAB in the description field
+* Added very small examples to the hierBAPS and save_lml_logs functions that run in <5 seconds
 
 ## Test environments
 * local OS X install, R 3.5.0

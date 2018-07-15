@@ -7,11 +7,9 @@
 #' @param file The file you would like to save the log output to.
 #'
 #' @examples
-#' \donttest{
-#' snp.matrix <- load_fasta(system.file("extdata", "seqs.fa", package = "rhierbaps"))
+#' snp.matrix <- load_fasta(system.file("extdata", "small_seqs.fa", package = "rhierbaps"))
 #' hb.result <- hierBAPS(snp.matrix, max.depth=2, n.pops=20)
 #' save_lml_logs(hb.result,  file.path(tempdir(), "output_file.txt"))
-#' }
 #'
 #' @export
 save_lml_logs <- function(hb.object, file){
