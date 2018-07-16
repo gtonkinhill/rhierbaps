@@ -35,8 +35,7 @@ calc_log_ml <- function(snp.object, partition){
   #uniform prior on K:
   #prior prob of each partition is equal so must divide by the number of possible
   #partitions.
-  ml <- ml - log(gmp::Stirling2(nrow(snp.object$data), length(unique(partition)),
-                            method = "lookup.or.store"))
+  ml <- ml - log_stirling2(nrow(snp.object$data), length(unique(partition)))
 
   return(ml)
 }

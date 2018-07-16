@@ -114,7 +114,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#> 100.243  11.134 130.635
+#>  80.176   9.586  90.514
 ```
 
 For very large data sets it might be necessary to increase the recursion limit of R
@@ -177,11 +177,11 @@ hb.results$lml.list
 #> 
 #> $`Depth 1`
 #>          1          2          3          4          5          6 
-#> -2121.8602 -4012.3594 -4237.7634 -3095.1866 -1525.7361 -3180.7573 
+#> -2121.8600 -4012.3594 -4237.7633 -3095.1865 -1525.7359 -3180.7572 
 #>          7          8          9         10         11         12 
-#> -4015.5022 -2104.5238 -1736.0193  -779.7693  -810.5962  -688.5221 
+#> -4015.5021 -2104.5241 -1736.0192  -779.7774  -810.6036  -688.5223 
 #>         13 
-#>  -163.3203
+#>  -163.3257
 ```
 
 Saving results

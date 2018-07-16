@@ -47,15 +47,21 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
   if(comb.chache[arg.max[[1]], arg.max[[2]]] > (max_ml+threshold)){
     partition[partition==arg.max[[2]]] <- arg.max[[1]]
     is.improved <- TRUE
-    diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
-               max_ml + 
-               2*log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-1,
-                                    method = "lookup.or.store")) - 
-               log(gmp::Stirling2(nrow(snp.object$data), length(clusters),
-                                  method = "lookup.or.store")) -
-               log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-2,
-                                  method = "lookup.or.store"))
-    )
+    if (length(clusters)<=2){
+      diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
+                 max_ml + 
+                 2*log_stirling2(nrow(snp.object$data), length(clusters)-1) - 
+                 log_stirling2(nrow(snp.object$data), length(clusters))
+      )
+    } else {
+      diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
+                 max_ml + 
+                 2*log_stirling2(nrow(snp.object$data), length(clusters)-1) - 
+                 log_stirling2(nrow(snp.object$data), length(clusters)) -
+                 log_stirling2(nrow(snp.object$data), length(clusters)-2)
+      )
+    }
+    
     max_ml <- comb.chache[arg.max[[1]], arg.max[[2]]]
     comb.chache <- comb.chache + diff
     comb.chache[arg.max[[1]], ] <- NA

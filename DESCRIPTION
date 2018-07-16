@@ -11,13 +11,13 @@ Description: Implements the hierarchical Bayesian analysis of populations struct
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports:
+Imports: 
     ape,
     dplyr,
-    gmp,
     purrr,
     utils,
-    ggplot2
+    ggplot2,
+    LambertW
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
