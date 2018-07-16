@@ -82,12 +82,6 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 system.time(hierBAPS(snp.matrix, max.depth=2, n.pops=20, quiet = TRUE))
 ```
 
-For very large data sets it might be necessary to increase the recursion limit of R
-
-```{r}
-options(expressions=10000)
-```
-
 ## Plotting results
 
 To plot the results it is useful to consider a tree of the same isolates. We clustered the example isolates using Iqtree [@Kalyaanamoorthy2017-go]. The ggtree [@Yu2017-bf] package then allows us to plot the results.

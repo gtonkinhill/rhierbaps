@@ -114,13 +114,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#>  80.176   9.586  90.514
-```
-
-For very large data sets it might be necessary to increase the recursion limit of R
-
-``` r
-options(expressions = 10000)
+#>  81.671   9.840  94.237
 ```
 
 Plotting results
@@ -144,7 +138,7 @@ gg <- gg + geom_tippoint(aes(color = factor(`level 1`)))
 gg
 ```
 
-![](inst/vignette-supp/unnamed-chunk-14-1.png)
+![](inst/vignette-supp/unnamed-chunk-13-1.png)
 
 As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding clusters.
 
@@ -157,7 +151,7 @@ gg <- gg + geom_tiplab(aes(label = `level 2`), size = 1, offset = 1)
 gg
 ```
 
-![](inst/vignette-supp/unnamed-chunk-15-1.png)
+![](inst/vignette-supp/unnamed-chunk-14-1.png)
 
 We can also zoom in on a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
 
@@ -165,7 +159,7 @@ We can also zoom in on a particular top level cluster to get a better idea of ho
 plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
 ```
 
-![](inst/vignette-supp/unnamed-chunk-16-1.png)
+![](inst/vignette-supp/unnamed-chunk-15-1.png)
 
 Finally, we can inspect the log marginal likelihoods given for each level.
 
