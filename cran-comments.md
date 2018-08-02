@@ -7,6 +7,7 @@ This is a resubmission. In this version I have:
 * Amended examples and vignettes that were writing to the users filespace
 * Added quotes around MATLAB in the description field
 * Added very small examples to the hierBAPS and save_lml_logs functions that run in <5 seconds
+* I'm resubmitting in an attempt to overwrite my previous submission as I identified a minor bug. Apologies if this causes confusion
 
 ## Test environments
 * local OS X install, R 3.5.0

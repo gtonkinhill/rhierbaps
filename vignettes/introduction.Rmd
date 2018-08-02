@@ -33,7 +33,6 @@ The hierBAPS algorithm was introduced in [@Cheng2013-mp] and provides a method f
 4. The initial number of populations should be set much higher than the expected number of populations.
 5. More search rounds of the algorithm can be added using the `n.extra.rounds` parameter.
 6. To get reproducible results the seed in R must be set.
-7. When running larger datasets increasing R's stack size limit might be required. `options(expressions=10000)`
 
 ## Libraries
 
@@ -136,13 +135,24 @@ write.csv(hb.results$partition.df, file=file.path(tempdir(), "hierbaps_partition
 save_lml_logs(hb.results,  file.path(tempdir(), "hierbaps_logML.txt"))
 ```
 
+## Citing rhierbaps
+
+If you use rhierbaps in a research publication please cite both
+
+Tonkin-Hill, Gerry, John A. Lees, Stephen D. Bentley, Simon D. W. Frost, and Jukka Corander. 2018. “RhierBAPS: An R Implementation of the Population Clustering Algorithm hierBAPS.” Wellcome Open Research 3 (July): 93.
+
+Cheng, Lu, Thomas R. Connor, Jukka Sirén, David M. Aanensen, and Jukka Corander. 2013. “Hierarchical and Spatially Explicit Clustering of DNA Sequences with BAPS Software.” Molecular Biology and Evolution 30 (5): 1224–28.
+
 ## References
 
 ---
 nocite: '@*'
 ...
 
-##Appendix
+## Session Information
+
 ```{r}
 sessionInfo()
 ```
+
+

@@ -24,7 +24,12 @@ knitr::opts_chunk$set(
 # rhierbaps
 
 ## Installation
-`rhierbaps` is currently available on github. It can be installed with `devtools`
+`rhierbaps` is available on CRAN.
+```{r, eval=FALSE}
+install.packages("rhierbaps")
+```
+
+The development version is available on github. It can be installed with `devtools`
 ```{r, eval = FALSE}
 install.packages("devtools")
 
@@ -41,7 +46,7 @@ devtools::install_github("gtonkinhill/rhierbaps", build_vignettes = TRUE)
 Run hierBAPS.
 
 ```{r, fig.width =8, fig.height=6, fig.align='center'}
-# devtools::install_github("gtonkinhill/rhierbaps")
+# install.packages("rhierbaps")
 library(rhierbaps)
 
 fasta.file.name <- system.file("extdata", "seqs.fa", package = "rhierbaps")
@@ -59,7 +64,7 @@ raw_rmd <- readLines(intro_rmd)
 yaml_lines <- grep("---", raw_rmd)
 
 # remove appendix (session info)
-appendix <- grep("Appendix", raw_rmd)
+appendix <- grep("Session", raw_rmd)
 
 compressed_rmd <- raw_rmd[c(-seq(yaml_lines[1], yaml_lines[2], by = 1), 
                             -seq(appendix, length(raw_rmd)))]
