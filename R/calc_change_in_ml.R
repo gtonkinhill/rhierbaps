@@ -31,10 +31,10 @@ calc_change_in_ml <- function(snp.object, partition, indexes){
   mT <- t(rowsum(1*(snp.object$data=="t"), temp_partition))
 
   #now add counts from the temp cluster to every other cluster and take away from its own.
-  mA <- mA[,colnames(mA)!=temp_cluster] + mA[, colnames(mA)==temp_cluster]
-  mC <- mC[,colnames(mC)!=temp_cluster] + mC[, colnames(mC)==temp_cluster]
-  mG <- mG[,colnames(mG)!=temp_cluster] + mG[, colnames(mG)==temp_cluster]
-  mT <- mT[,colnames(mT)!=temp_cluster] + mT[, colnames(mT)==temp_cluster]
+  mA <- mA[,colnames(mA)!=temp_cluster, drop=FALSE] + mA[, colnames(mA)==temp_cluster]
+  mC <- mC[,colnames(mC)!=temp_cluster, drop=FALSE] + mC[, colnames(mC)==temp_cluster]
+  mG <- mG[,colnames(mG)!=temp_cluster, drop=FALSE] + mG[, colnames(mG)==temp_cluster]
+  mT <- mT[,colnames(mT)!=temp_cluster, drop=FALSE] + mT[, colnames(mT)==temp_cluster]
 
   prior <- snp.object$prior
   prior[prior==0] <- 1 #deal with zeros and resulting NAs
