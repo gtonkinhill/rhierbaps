@@ -70,6 +70,7 @@ Libraries
 library(rhierbaps)
 library(ggtree)
 library(phytools)
+library(ape)
 
 set.seed(1234)
 ```
@@ -85,6 +86,13 @@ snp.matrix <- load_fasta(fasta.file.name)
 ```
 
 If you wish to include singleton SNPs (those that appear in only one isolate) then set `keep.singletons=FALSE`. However, this is currently advised against as these SNPs lead to a higher number of parameters in the model and do not provide information about shared ancestry.
+
+It is also possible to load an ape DNAbin object. Here me make use of the woodmouse dataset in ape.
+
+``` r
+data(woodmouse)
+woodmouse.snp.matrix <- load_fasta(woodmouse)
+```
 
 Running hierBAPS
 ----------------
@@ -119,7 +127,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#>  83.378  10.177  96.571
+#>  85.528  12.900 102.441
 ```
 
 Plotting results
@@ -143,7 +151,7 @@ gg <- gg + geom_tippoint(aes(color = factor(`level 1`)))
 gg
 ```
 
-![](inst/vignette-supp/unnamed-chunk-14-1.png)
+![](inst/vignette-supp/unnamed-chunk-15-1.png)
 
 As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding clusters.
 
@@ -156,7 +164,7 @@ gg <- gg + geom_tiplab(aes(label = `level 2`), size = 1, offset = 1)
 gg
 ```
 
-![](inst/vignette-supp/unnamed-chunk-15-1.png)
+![](inst/vignette-supp/unnamed-chunk-16-1.png)
 
 We can also zoom in on a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
 
@@ -164,7 +172,7 @@ We can also zoom in on a particular top level cluster to get a better idea of ho
 plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
 ```
 
-![](inst/vignette-supp/unnamed-chunk-16-1.png)
+![](inst/vignette-supp/unnamed-chunk-17-1.png)
 
 Finally, we can inspect the log marginal likelihoods given for each level.
 

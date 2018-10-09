@@ -40,6 +40,7 @@ The hierBAPS algorithm was introduced in [@Cheng2013-mp] and provides a method f
 library(rhierbaps)
 library(ggtree)
 library(phytools)
+library(ape)
 
 set.seed(1234)
 ```
@@ -54,6 +55,13 @@ snp.matrix <- load_fasta(fasta.file.name)
 ```
 
 If you wish to include singleton SNPs (those that appear in only one isolate) then set `keep.singletons=FALSE`. However, this is currently advised against as these SNPs lead to a higher number of parameters in the model and do not provide information about shared ancestry.
+
+It is also possible to load an ape DNAbin object. Here me make use of the woodmouse dataset in ape.
+
+```{r}
+data(woodmouse)
+woodmouse.snp.matrix <- load_fasta(woodmouse)
+```
 
 ## Running hierBAPS
 
