@@ -1,13 +1,8 @@
 ## Resubmission
-This is a resubmission. In this version I have:
+This is a an updated version. In this version I have:
 
-* Amended the Authors@R field as requested
-* Improved the title and description as requested
-* Removed examples for functions that were not exported and replaced dontrun with donttest
-* Amended examples and vignettes that were writing to the users filespace
-* Added quotes around MATLAB in the description field
-* Added very small examples to the hierBAPS and save_lml_logs functions that run in <5 seconds
-* I'm resubmitting in an attempt to overwrite my previous submission as I identified a minor bug. Apologies if this causes confusion
+* Fixed a minor bug that caused an error when a cluster contained only a single SNP
+* Added functionality to accept and ape DNAbin object
 
 ## Test environments
 * local OS X install, R 3.5.0
@@ -16,5 +11,3 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
-
-This is an initial submission.
