@@ -10,6 +10,7 @@
 #' @param n.extra.rounds The number of additional rounds to perform after the default hierBAPS
 #' settings (default=0). If set to Inf it will run until a local optimum is reached
 #' (this might take a long time).
+#' @param assignment.probs whether or not to calculate the assignment probabilities to each cluster (default=FALSE)
 #' @param n.cores The number of cores to use.
 #'
 #' @return A list containing a dataframe indicating an assignment of each sequence
@@ -29,7 +30,7 @@
 #'
 #' @export
 hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
-                     quiet=FALSE, n.extra.rounds=0, n.cores=1){
+                     quiet=FALSE, n.extra.rounds=0, assignment.probs=FALSE, n.cores=1){
 
   #Check inputs
   if (class(snp.matrix)!="matrix") stop("snp.matrix is not a matrix!")
@@ -162,6 +163,37 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
   names(lml.list) <- paste("Depth", seq(0, max.depth-1))
   partition.df <- data.frame(isolates=snp.object$heds, all.partition.matrix)
   colnames(partition.df) <- c("Isolate", paste("level", 1:ncol(all.partition.matrix)))
+  
+  if(assignment.probs){
+    #calculate assignment probabilities
+    colnames(snp.object$data) <- 1:ncol(snp.object$data)
+    consensus <- apply(snp.object$data, 2, function(x) table(factor(x, levels = c("a","c","g","t")),
+                                                             exclude = c("-", NA)))
+    consensus <- rownames(consensus)[apply(consensus,2,which.max)]
+    cluster.ass.prob.list <- lapply(1:max.depth, function(l){
+      partitions <- split(1:nrow(snp.matrix), partition.df[,l+1])
+      cluster.ass.probs <- do.call(cbind, lapply(partitions, function(p){
+        cluster.allele.freqs <- apply(snp.object$data[p,,drop=FALSE], 2, function(x) table(factor(x, levels = c("a","c","g","t")),
+                                                                                           exclude = c("-", NA)))
+        cluster.allele.freqs <- log((cluster.allele.freqs + snp.object$prior)/(length(p)+1))
+        apply(snp.object$data, 1, function(seq){
+          seq[seq=="-"] <- consensus[seq=="-"]
+          return(sum(cluster.allele.freqs[cbind(seq, 1:ncol(cluster.allele.freqs))]))
+        })
+      }))
+      cluster.ass.probs <- cluster.ass.probs-apply(cluster.ass.probs, 1, matrixStats::logSumExp)
+      cluster.ass.probs <- exp(cluster.ass.probs)
+      cluster.ass.probs[cluster.ass.probs<1e-16] <- 0
+      rownames(cluster.ass.probs) <- snp.object$heds
+      colnames(cluster.ass.probs) <- paste("Cluster", 1:ncol(cluster.ass.probs))
+      return(cluster.ass.probs)
+    })
+    
+    return(list(partition.df=partition.df,
+                cluster.assignment.prob=cluster.ass.prob.list,
+                lml.list=lml.list))
+  }
+  
   return(list(partition.df=partition.df,
               lml.list=lml.list))
 }

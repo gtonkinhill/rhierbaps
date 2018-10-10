@@ -5,3 +5,5 @@ cran-comments.md
 README.Rmd
 .gitignore
 ^LICENSE\.md$
+revdep
+revdep/*

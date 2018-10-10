@@ -127,7 +127,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#>  85.528  12.900 102.441
+#>  80.761   9.552  91.742
 ```
 
 Plotting results
@@ -189,6 +189,24 @@ hb.results$lml.list
 #> -4015.5021 -2104.5241 -1736.0192  -779.7774  -810.6036  -688.5223 
 #>         13 
 #>  -163.3257
+```
+
+Caculating assignment probabilities
+-----------------------------------
+
+We can also calculate the individual probabilities of assignment to each cluster. Here we make use of the woodmouse dataset loaded earlier.
+
+``` r
+hb.results.woodmouse <- hierBAPS(woodmouse.snp.matrix, max.depth = 2, n.extra.rounds = Inf, 
+    quiet = TRUE, assignment.probs = TRUE)
+head(hb.results.woodmouse$cluster.assignment.prob[[1]])
+#>            Cluster 1    Cluster 2    Cluster 3
+#> No305   9.997868e-01 2.104112e-04 2.805482e-06
+#> No304   5.620947e-06 9.999944e-01 1.699254e-11
+#> No306   8.996214e-03 9.910038e-01 9.626735e-09
+#> No0906S 9.965743e-01 3.425673e-03 1.902359e-08
+#> No0908S 9.911304e-01 8.869359e-03 2.068655e-07
+#> No0909S 2.615477e-09 1.105831e-10 1.000000e+00
 ```
 
 Saving results

@@ -132,6 +132,16 @@ Finally, we can inspect the log marginal likelihoods given for each level.
 hb.results$lml.list
 ```
 
+## Caculating assignment probabilities
+
+We can also calculate the individual probabilities of assignment to each cluster. Here we make use of the woodmouse dataset loaded earlier.
+
+```{r}
+hb.results.woodmouse <- hierBAPS(woodmouse.snp.matrix, max.depth=2, n.extra.rounds = Inf,
+                                 quiet = TRUE, assignment.probs = TRUE)
+head(hb.results.woodmouse$cluster.assignment.prob[[1]])
+```
+
 ## Saving results
 
 For runs that take a long time it is a good idea to save the output. We can save the partition file as

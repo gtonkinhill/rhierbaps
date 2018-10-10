@@ -5,7 +5,8 @@
 \title{hierBAPS}
 \usage{
 hierBAPS(snp.matrix, max.depth = 2, n.pops = floor(nrow(snp.matrix)/5),
-  quiet = FALSE, n.extra.rounds = 0, n.cores = 1)
+  quiet = FALSE, n.extra.rounds = 0, assignment.probs = FALSE,
+  n.cores = 1)
 }
 \arguments{
 \item{snp.matrix}{Character matrix of aligned sequences produced by \link{load_fasta}.}
@@ -19,6 +20,8 @@ hierBAPS(snp.matrix, max.depth = 2, n.pops = floor(nrow(snp.matrix)/5),
 \item{n.extra.rounds}{The number of additional rounds to perform after the default hierBAPS
 settings (default=0). If set to Inf it will run until a local optimum is reached
 (this might take a long time).}
+
+\item{assignment.probs}{whether or not to calculate the assignment probabilities to each cluster (default=FALSE)}
 
 \item{n.cores}{The number of cores to use.}
 }
