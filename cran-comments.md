@@ -2,7 +2,7 @@
 This is a an updated version. In this version I have:
 
 * Fixed a minor bug that caused an error when a cluster contained only a single SNP
-* Added functionality to accept and ape DNAbin object
+* Added functionality to accept an ape DNAbin object
 
 ## Test environments
 * local OS X install, R 3.5.0
