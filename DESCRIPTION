@@ -1,7 +1,7 @@
 Package: rhierbaps
 Type: Package
 Title: Clustering Genetic Sequence Data Using the HierBAPS Algorithm
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: person("Gerry", "Tonkin-Hill", email = "g.tonkinhill@gmail.com", role = c("cre", "aut"))
 Description: Implements the hierarchical Bayesian analysis of populations structure (hierBAPS) 
   algorithm of Cheng et al. (2013) <doi:10.1093/molbev/mst028> for clustering DNA sequences 
@@ -18,12 +18,13 @@ Imports:
     ggplot2,
     LambertW,
     matrixStats
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown,
     ggtree,
     phytools,
-    testthat
+    testthat,
+    formatR
 VignetteBuilder: knitr
 URL: https://github.com/gtonkinhill/rhierbaps
 BugReports: https://github.com/gtonkinhill/rhierbaps/issues

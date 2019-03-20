@@ -102,7 +102,7 @@ iqtree <- phytools::read.newick(newick.file.name)
 
 A simple coloured tree allows us to see the top level cluster assignment from hierBAPS.
 
-```{r}
+```{r, eval=FALSE}
 gg <- ggtree(iqtree, layout="circular")
 gg <- gg %<+% hb.results$partition.df
 gg <- gg + geom_tippoint(aes(color=factor(`level 1`)))
@@ -111,7 +111,7 @@ gg
 
 As there are many more clusters at the second level using colours to distinguish them can get confusing. Instead we can label the tips with their corresponding clusters.
 
-```{r}
+```{r, eval=FALSE}
 gg <- ggtree(iqtree, layout="circular", branch.length = "none")
 gg <- gg %<+% hb.results$partition.df
 gg <- gg + geom_tippoint(aes(color=factor(`level 1`)))
@@ -122,7 +122,7 @@ gg
 
 We can also zoom in on a particular top level cluster to get a better idea of how it is partitioned at the lower level. As an example we zoom in on sub cluster 9 at level 1.
 
-```{r}
+```{r, eval=FALSE}
 plot_sub_cluster(hb.results, iqtree, level = 1, sub.cluster = 9)
 ```
 

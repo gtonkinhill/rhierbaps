@@ -7,7 +7,19 @@ warnings_are_errors: false
 
 sudo: required
 
-before_install: sudo apt-get install libgmp3-dev
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libmagick++-dev
+  - sudo apt-get install libgmp3-dev
+
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - lcov
 
 notifications:
     slack: pathogens:8NUkMUXlMNecj9NXnwTKbBQU
