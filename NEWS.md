@@ -1,3 +1,6 @@
+# rhierbaps 1.1.2
+Fixed issue with stirling2 dependency causing the algorithm to stop prematurely for very large alignments.
+
 # rhierbaps 1.1.1
 Removed call to ggtree in introduction vignette as waiting on patch for ggtree given the new version of tibble.
 

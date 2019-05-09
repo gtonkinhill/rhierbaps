@@ -50,15 +50,15 @@ join_units_2 <- function(snp.object, partition, threshold=1e-5, n.cores=1, comb.
     if (length(clusters)<=2){
       diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
                  max_ml + 
-                 2*log_stirling2(nrow(snp.object$data), length(clusters)-1) - 
-                 log_stirling2(nrow(snp.object$data), length(clusters))
+                 2*log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-1)) - 
+                 log(gmp::Stirling2(nrow(snp.object$data), length(clusters)))
       )
     } else {
       diff <- (comb.chache[arg.max[[1]], arg.max[[2]]] - 
                  max_ml + 
-                 2*log_stirling2(nrow(snp.object$data), length(clusters)-1) - 
-                 log_stirling2(nrow(snp.object$data), length(clusters)) -
-                 log_stirling2(nrow(snp.object$data), length(clusters)-2)
+                 2*log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-1)) - 
+                 log(gmp::Stirling2(nrow(snp.object$data), length(clusters))) -
+                 log(gmp::Stirling2(nrow(snp.object$data), length(clusters)-2))
       )
     }
     
