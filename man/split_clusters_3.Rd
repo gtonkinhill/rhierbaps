@@ -4,8 +4,13 @@
 \alias{split_clusters_3}
 \title{split_clusters_3}
 \usage{
-split_clusters_3(snp.object, partition, threshold = 1e-05,
-  min.clust.size = 20, n.cores = 1)
+split_clusters_3(
+  snp.object,
+  partition,
+  threshold = 1e-05,
+  min.clust.size = 20,
+  n.cores = 1
+)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}

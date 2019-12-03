@@ -5,6 +5,8 @@
 rhierbaps
 =========
 
+We have recently developed a faster verion of the BAPs clustering method. It can be found [here](https://github.com/gtonkinhill/fastbaps).
+
 Installation
 ------------
 
@@ -127,7 +129,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#>  79.411  12.454  98.874
+#>  89.755  10.111 117.755
 ```
 
 Plotting results
@@ -183,12 +185,10 @@ hb.results$lml.list
 #> -50858.92 
 #> 
 #> $`Depth 1`
-#>          1          2          3          4          5          6 
-#> -2121.8602 -4012.3594 -4237.7634 -3095.1866 -1525.7361 -3180.7573 
-#>          7          8          9         10         11         12 
-#> -4015.5022 -2104.5238 -1736.0193  -779.7693  -810.5962  -688.5221 
-#>         13 
-#>  -163.3203
+#>          1          2          3          4          5          6          7 
+#> -2121.8602 -4012.3594 -4237.7634 -3095.1866 -1525.7361 -3180.7573 -4015.5022 
+#>          8          9         10         11         12         13 
+#> -2104.5238 -1736.0193  -779.7693  -810.5962  -688.5221  -163.3203
 ```
 
 Caculating assignment probabilities

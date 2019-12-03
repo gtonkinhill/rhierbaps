@@ -4,9 +4,15 @@
 \alias{hierBAPS}
 \title{hierBAPS}
 \usage{
-hierBAPS(snp.matrix, max.depth = 2, n.pops = floor(nrow(snp.matrix)/5),
-  quiet = FALSE, n.extra.rounds = 0, assignment.probs = FALSE,
-  n.cores = 1)
+hierBAPS(
+  snp.matrix,
+  max.depth = 2,
+  n.pops = floor(nrow(snp.matrix)/5),
+  quiet = FALSE,
+  n.extra.rounds = 0,
+  assignment.probs = FALSE,
+  n.cores = 1
+)
 }
 \arguments{
 \item{snp.matrix}{Character matrix of aligned sequences produced by \link{load_fasta}.}

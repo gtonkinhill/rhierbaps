@@ -4,8 +4,13 @@
 \alias{join_units_2}
 \title{join_units_2}
 \usage{
-join_units_2(snp.object, partition, threshold = 1e-05, n.cores = 1,
-  comb.chache = NULL)
+join_units_2(
+  snp.object,
+  partition,
+  threshold = 1e-05,
+  n.cores = 1,
+  comb.chache = NULL
+)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}

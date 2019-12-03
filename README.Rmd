@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
 
 # rhierbaps
 
+We have recently developed a faster verion of the BAPs clustering method. It can be found [here](https://github.com/gtonkinhill/fastbaps). 
+
 ## Installation
 `rhierbaps` is available on CRAN.
 ```{r, eval=FALSE}

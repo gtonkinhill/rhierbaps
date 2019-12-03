@@ -4,8 +4,14 @@
 \alias{model_search_parallel}
 \title{model_search_parallel}
 \usage{
-model_search_parallel(snp.object, partition, round.types, quiet = FALSE,
-  n.extra.rounds = 0, n.cores = 1)
+model_search_parallel(
+  snp.object,
+  partition,
+  round.types,
+  quiet = FALSE,
+  n.extra.rounds = 0,
+  n.cores = 1
+)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}

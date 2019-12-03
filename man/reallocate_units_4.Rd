@@ -4,8 +4,14 @@
 \alias{reallocate_units_4}
 \title{reallocate_units_4}
 \usage{
-reallocate_units_4(snp.object, partition, threshold = 1e-05,
-  min.clust.size = 20, split = FALSE, n.cores = 1)
+reallocate_units_4(
+  snp.object,
+  partition,
+  threshold = 1e-05,
+  min.clust.size = 20,
+  split = FALSE,
+  n.cores = 1
+)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}

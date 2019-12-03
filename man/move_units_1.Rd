@@ -4,8 +4,14 @@
 \alias{move_units_1}
 \title{move_units_1}
 \usage{
-move_units_1(snp.object, partition, threshold = 1e-05,
-  frac.clust.searched = 0.3, min.clust.size = 20, n.cores = 1)
+move_units_1(
+  snp.object,
+  partition,
+  threshold = 1e-05,
+  frac.clust.searched = 0.3,
+  min.clust.size = 20,
+  n.cores = 1
+)
 }
 \arguments{
 \item{snp.object}{A snp.object containing the processed SNP data.}
