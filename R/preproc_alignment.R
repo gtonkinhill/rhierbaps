@@ -8,7 +8,7 @@
 #' @return an snp.object
 #'
 preproc_alignment <- function(snp.matrix){
-  if(class(snp.matrix)!="matrix") stop("snp.matrix is not a valid matrix")
+  if(!is.matrix(snp.matrix)) stop("snp.matrix is not a valid matrix")
 
   n.seq <- nrow(snp.matrix)
 
