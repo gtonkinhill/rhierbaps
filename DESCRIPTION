@@ -16,7 +16,6 @@ Imports:
     purrr,
     utils,
     ggplot2,
-    gmp,
     matrixStats,
     patchwork
 RoxygenNote: 7.0.1

@@ -129,7 +129,7 @@ We can also check how long hierBAPS takes to run on the test dataset of 515 samp
 ``` r
 system.time(hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, quiet = TRUE))
 #>    user  system elapsed 
-#>  89.755  10.111 117.755
+#>  79.663   7.723  92.375
 ```
 
 Plotting results
@@ -186,9 +186,9 @@ hb.results$lml.list
 #> 
 #> $`Depth 1`
 #>          1          2          3          4          5          6          7 
-#> -2121.8602 -4012.3594 -4237.7634 -3095.1866 -1525.7361 -3180.7573 -4015.5022 
+#> -2121.8599 -4012.3594 -4237.7639 -3095.1865 -1525.7356 -3180.7572 -4015.5020 
 #>          8          9         10         11         12         13 
-#> -2104.5238 -1736.0193  -779.7693  -810.5962  -688.5221  -163.3203
+#> -2104.5277 -1736.0192  -780.0635  -810.7793  -688.5214  -163.3198
 ```
 
 Caculating assignment probabilities

@@ -33,7 +33,7 @@ hierBAPS <- function(snp.matrix, max.depth=2, n.pops=floor(nrow(snp.matrix)/5),
                      quiet=FALSE, n.extra.rounds=0, assignment.probs=FALSE, n.cores=1){
 
   #Check inputs
-  if (class(snp.matrix)!="matrix") stop("snp.matrix is not a matrix!")
+  if (!is.matrix(snp.matrix)) stop("snp.matrix is not a matrix!")
   if ((!is.numeric(max.depth)) || (max.depth<1)) stop("Invalid max.depth! Must be a positive integer.")
   if ((!is.numeric(n.pops)) || (n.pops<1)) stop("Invalid n.pops! Must be a positive integer.")
   if (!is.logical(quiet)) stop("Invalid quiet! Must be one of TRUE/FALSE.")
