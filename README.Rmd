@@ -18,7 +18,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/gtonkinhill/rhierbaps.svg?branch=master)](https://travis-ci.org/gtonkinhill/rhierbaps)
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/gtonkinhill/rhierbaps/workflows/R-CMD-check/badge.svg)](https://github.com/gtonkinhill/rhierbaps/actions)
+<!-- badges: end -->
 
 
 # rhierbaps
