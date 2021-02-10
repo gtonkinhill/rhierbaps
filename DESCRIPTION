@@ -18,7 +18,7 @@ Imports:
     ggplot2,
     matrixStats,
     patchwork
-RoxygenNote: 7.0.1
+RoxygenNote: 7.1.0
 Suggests: knitr,
     rmarkdown,
     ggtree,
