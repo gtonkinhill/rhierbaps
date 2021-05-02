@@ -21,6 +21,7 @@ Imports:
 RoxygenNote: 7.1.0
 Suggests: knitr,
     rmarkdown,
+    markdown,
     ggtree,
     phytools,
     testthat,
