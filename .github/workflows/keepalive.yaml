@@ -1,0 +1,21 @@
+name: Keepalive Workflow
+
+on:
+  schedule:
+    # This runs at midnight on the 1st of every month. 
+    # Since your main workflow runs once a month, this is a safe schedule to ensure the repo stays active.
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # Allows you to run it manually if needed
+
+jobs:
+  cronjob-keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Keepalive
+        uses: gautamkrishnar/keepalive-workflow@v2
+        with:
+          # Optional: custom commit message for the dummy commit
+          commit_message: "chore: keep github actions alive"
